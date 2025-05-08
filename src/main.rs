@@ -127,6 +127,12 @@ fn test_binary_search_tree(){
     }
 }
 
+let median = median(root.clone());
+println!("Median {:?}", median)
+
+let mut output = vec::new():
+inorder(root.clone(), &mut output);
+
 fn test_index(){
     let words: Vec<Vec<i32>> = vec![
                                 vec![1, 2, 3, 4],
@@ -137,13 +143,6 @@ fn test_index(){
                                 ];
     println!("{0}", words[0][0]);
 }
-
-
-let median = median(root.clone());
-println!("Median {:?}", median)
-
-let mut output = vec::new():
-inorder(root.clone(), &mut output);
 
 #[allow(dead_code)]
 fn test_binary_tree() {
