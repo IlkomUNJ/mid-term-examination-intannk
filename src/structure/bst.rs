@@ -352,4 +352,78 @@ impl BstNode {
             Some(x) => Some(x.upgrade().unwrap()),
         }
     }
+
+    fn add_node(&self, target_node: &BstNodeLink, value: i32)→ bool {
+        if let some(target_rc) = target_node {
+            let mut target = target_rc.borrow_mut()
+            let new_node = 
+            Rc::new(RefCell::new(BstNode {
+                key:value,
+                left:none,
+                right:none,
+                parent:
+            Some(Rc::clone(target_rc));
+            }))
+            if target.left.is_none(){
+                target.left = Some(Rc::clone(&new_node));
+                return true;
+            } else if 
+            target.right.is_none() {
+                target.right = Some(Rc::clone(&new_node));
+                return true;
+            }
+            false
+        }
+    }
+
+    fn tree_predecessor(node &BstNodeLink) → Option<BstNodeLink> {
+        if let Some(rc_node) = &node.borrow().left {
+            return Some(left_node.borrow(), maximum());
+    }
+
+    let mut current = node.clone();
+    let mut parent = BstNode::upgrade_weak_to_strong(current.borrow().parent.clone());
+
+    while let Some(ref p) = parent {
+        if let Some right = &p.borrow().right {
+            if BstNode::is_node_match(right, &current){
+                return Some (p.clone());
+            }
+        }
+        current = p.clone();
+        parent = BstNode::upgrade_weak_to_strong(current.borrow().parent.clone());
+        }
+        none
+    }
+
+    fn median(&self) → BstNodeLink {
+        let mut nodes = Vec::new();
+        inorder(root, &mut nodes);
+        let mid = nodes.len() / 2;
+        nodes.get(mid).cloned()
+    }
+
+    fn inorder(node: &BstNodeLink, output: &mut vec<BstNodeLink>) {
+        if let some(n) = node {
+            let n_borrow = n.borrow();
+            inn(&n_borrow.left, output);
+
+            output.push(some(Rc::clone(n)));
+            inorder(&n_borrow.right, output);
+        }
+    }
+
+    fn tree_rebalance(node: &BstNodeLink) → BstNodeLink {
+        let mut values = Vec::new();
+        inorder_keys(root, &mut values);
+        build_balance(&values, 0, values.len())
+    }
+
+    fn inorder_keys(node: BstNodeLink, output: &mut Vec<132>) {
+        if let Some(n) = node {
+            let n_borrow = n.borrow(): inorder_keys(&n_borrow.left, output);
+            output.push(n_borrow.key);
+            inorder_keys(&n_borrow.right, output);
+        }
+    }
 }
